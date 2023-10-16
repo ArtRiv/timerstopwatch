@@ -17,27 +17,43 @@ inputTimeMinutes.addEventListener("input", function() {
 });
 
 inputTimeSeconds.addEventListener("input", function() {
-
     inputTimeSeconds.value = inputTimeSeconds.value.replace(/[^0-9]/g, '');
 });
 
-minutesSeconds.addEventListener("click", function() {
+let running = false;
+
+if (running == false) {
+    minutesSeconds.addEventListener("click", handleClickMinutesSeconds);
+    startButton.addEventListener("click", handleClickStartButton);
+} 
+
+function handleClickMinutesSeconds() {
     minutesSeconds.style.display = "none";
     minutesSecondsInput.style.display = "flex";
-}); 
+    running = true;
+    console.log(running);
 
-startButton.addEventListener("click", function() {
+    minutesSeconds.removeEventListener("click", handleClickMinutesSeconds);
+}
+
+function handleClickStartButton() {
     let seconds = parseInt(inputTimeSeconds.value);
     let minutes = parseInt(inputTimeMinutes.value);
 
     if (seconds > 59) {
         seconds = 59;
         console.log(seconds);
-    }
+    };
+
     if (minutes < 10) {
         minutesInputLeftZero.style.display = "flex";
+    };
+    
+    if (inputTimeMinutes.value.trim() === "" || isNaN(parseInt(inputTimeMinutes.value))) {
+        minutes = 0;
+        minutesInputLeftZero.style.display = "flex";
     }
-
+    
     function mainTimerSecondsFunction() { 
 
         if (seconds < 10 && seconds > 0){
@@ -92,5 +108,5 @@ startButton.addEventListener("click", function() {
     }
 
     const intervalId = setInterval(mainTimerSecondsFunction, 1000);
-
-});
+    startButton.removeEventListener("click", handleClickStartButton);
+}
