@@ -18,11 +18,13 @@
     <div class="page">
         <div class="main">
             <div class="time">
-                
+                <audio id="alarmAudio" controls>
+                    <source src="audio/alarm-clock-short-6402.mp3">
+                </audio>
                 <div class="minutesSecondsInput" id="minutesSecondsInput">
-                    <input type="text" class="inputTimeMinutes" id="inputTimeMinutes" pattern="^[0-9]*$" maxlength="2" placeholder="00"/>
+                    <input type="text" class="inputTimeMinutes" id="inputTimeMinutes" pattern="^[0-9]*$" maxlength="2" placeholder="00" autocomplete="off"/>
                     <span id = "spanInput">:</span>
-                    <input type="text" class="inputTimeSeconds" id="inputTimeSeconds" pattern="^(0|[0-6][0-9]|60)*$" maxlength="2" placeholder="00"/>
+                    <input type="text" class="inputTimeSeconds" id="inputTimeSeconds" pattern="^(0|[0-6][0-9]|60)*$" maxlength="2" placeholder="00" autocomplete="off"/>
                 </div>
                 
                 <div class="minutesSeconds" id="minutesSeconds">
@@ -40,7 +42,7 @@
                     <button class="startButton" id="startButton">
                         <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet"><circle cx="32" cy="32" r="30" fill="#4fd1d9"></circle><path fill="#ffffff" d="M25 12l20 20l-20 20z"></path></svg>
                     </button>
-                    <button class="pauseButton">
+                    <button class="pauseButton" id="pauseButton">
                         <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet"><circle cx="32" cy="32" r="30" fill="#4fd1d9"></circle><g fill="#ffffff"><path d="M20 14h8v36h-8z"></path><path d="M36 14h8v36h-8z"></path></g></svg>
                     </button>
                     <div class="changeMode">
@@ -61,7 +63,7 @@
                             </svg>
                         </button>
                     </div>
-                    <button class="resetButton">
+                    <button class="resetButton" id="resetButton">
                         <svg width="800px" height="800px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet"><circle cx="32" cy="32" r="30" fill="#4fd1d9"></circle><path fill="#ffffff" d="M17 17h30v30H17z"></path></svg>                       
                     </button>
                 </div>
@@ -69,6 +71,8 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script src="filter.js"></script>
+    <script src="controlButtons.js"></script>
 </body>
 
 </html>
