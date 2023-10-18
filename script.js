@@ -1,112 +1,88 @@
-const minutesSeconds = document.querySelector("#minutesSeconds");
-const minutesSecondsInput = document.querySelector("#minutesSecondsInput");
-
-const inputTimeSeconds = document.querySelector("#inputTimeSeconds");
-const inputTimeMinutes = document.querySelector("#inputTimeMinutes");
-const minutesInputLeftZero = document.querySelector("#minutesInputLeftZero");
-const secondsInputLeftZero = document.querySelector("#secondsInputLeftZero");
-const spanInput = document.querySelector("#spanInput");
-
-const secondsTimer = document.querySelector("#secondsTimer");
 const minutesTimer = document.querySelector("#minutesTimer");
+const secondstimer = document.querySelector("#secondsTimer");
+const alarmAudio = document.querySelector("#alarmAudio");
+let intervalId;
 
-const startButton = document.querySelector("#startButton");
+minutesSeconds.addEventListener("click", changeToInput);
+minutesSeconds.click();
 
-inputTimeMinutes.addEventListener("input", function() {
-    inputTimeMinutes.value = inputTimeMinutes.value.replace(/[^0-9]/g, '');
-});
-
-inputTimeSeconds.addEventListener("input", function() {
-    inputTimeSeconds.value = inputTimeSeconds.value.replace(/[^0-9]/g, '');
-});
-
-let running = false;
-
-if (running == false) {
-    minutesSeconds.addEventListener("click", handleClickMinutesSeconds);
-    startButton.addEventListener("click", handleClickStartButton);
-} 
-
-function handleClickMinutesSeconds() {
+function changeToInput() {
     minutesSeconds.style.display = "none";
     minutesSecondsInput.style.display = "flex";
-    running = true;
-    console.log(running);
-
-    minutesSeconds.removeEventListener("click", handleClickMinutesSeconds);
+    minutesSeconds.removeEventListener("click", changeToInput);
+}
+function changeToOutput() {
+    minutesSeconds.style.display = "flex";
+    minutesSecondsInput.style.display = "none";
 }
 
-function handleClickStartButton() {
-    let seconds = parseInt(inputTimeSeconds.value);
+startButton.addEventListener("click", startTimer);
+
+function startTimer() {
+    changeToOutput();
+    if (checkIfValid()) {
+        startButton.style.display = "none";
+        pauseButton.style.display = "flex";
+        decreaseTime();
+        intervalId = setInterval(decreaseTime, 1000); 
+    }
+    else {
+        startButton.addEventListener("click", startTimer);
+        minutesSeconds.addEventListener("click", changeToInput);
+    }
+};
+
+pauseButton.addEventListener("click", pauseTimer);
+
+function pauseTimer() {
+    clearInterval(intervalId);
+    startButton.style.display = "flex";
+    pauseButton.style.display = "none";
+    startButton.addEventListener("click", startTimer);
+};
+
+function decreaseTime() {
+    checkIfValid();
     let minutes = parseInt(inputTimeMinutes.value);
+    let seconds = parseInt(inputTimeSeconds.value);
 
-    if (seconds > 59) {
-        seconds = 59;
+    if (seconds > 0) {
+        seconds--;
+        inputTimeSeconds.value = seconds;
         console.log(seconds);
-    };
-
-    if (minutes < 10) {
-        minutesInputLeftZero.style.display = "flex";
-    };
-    
-    if (inputTimeMinutes.value.trim() === "" || isNaN(parseInt(inputTimeMinutes.value))) {
-        minutes = 0;
-        minutesInputLeftZero.style.display = "flex";
+        secondstimer.innerHTML = seconds;
+        minutesTimer.innerHTML = minutes;
+        checkIfValid();
     }
-    
-    function mainTimerSecondsFunction() { 
-
-        if (seconds < 10 && seconds > 0){
-            secondsInputLeftZero.style.display = "flex";
-
-            seconds--;
-            console.log(seconds);
-
-            minutesSeconds.style.display = "flex";
-            minutesSecondsInput.style.display = "none";
-
-            secondsTimer.innerHTML = seconds;
-            minutesTimer.innerHTML = minutes;
-        }
-        else if (seconds == 10) {
-            seconds--;
-            console.log(seconds);
-            
-            minutesSeconds.style.display = "flex";
-            minutesSecondsInput.style.display = "none";
-            
-            secondsTimer.innerHTML = seconds;
-            minutesTimer.innerHTML = minutes;
-
-            secondsInputLeftZero.style.display = "flex";
-        }
-        else if (seconds > 10) {
-            seconds--;
-            console.log(seconds);
-            
-            minutesSeconds.style.display = "flex";
-            minutesSecondsInput.style.display = "none";
-
-            secondsTimer.innerHTML = seconds;
-            minutesTimer.innerHTML = minutes;
-        }
-        else {
-            mainTimerMinutesFunction();
-        }
-    };
-
-    function mainTimerMinutesFunction() {
+    else if (seconds == 0) {
         if (minutes > 0) {
+            secondsInputLeftZero.style.display = "none";
             seconds = 59;
+            console.log(seconds);
             minutes--;
-            console.log(minutes);
+
+            inputTimeMinutes.value = minutes;
+            inputTimeSeconds.value = seconds;
 
             minutesTimer.innerHTML = minutes;
-            secondsTimer.innerHTML = seconds;
+            secondstimer.innerHTML = seconds;
+            console.log(minutes);
+            checkIfValid();
+        } 
+        else if (minutes == 0) {
+            clearInterval(intervalId);
+            console.log("acabou");
+            pauseButton.style.display = "none";
+            startButton.style.display = "flex";
+            minutesInputLeftZero.style.display = "none";
             secondsInputLeftZero.style.display = "none";
+            startButton.addEventListener("click", startTimer);
+            minutesSeconds.addEventListener("click", changeToInput);
+            inputTimeMinutes.value = "";
+            inputTimeSeconds.value = "";
+            minutesTimer.innerHTML = "00";
+            secondstimer.innerHTML = "00";
+            alarmAudio.play();
         }
     }
-
-    const intervalId = setInterval(mainTimerSecondsFunction, 1000);
-    startButton.removeEventListener("click", handleClickStartButton);
 }
