@@ -17,6 +17,10 @@ body {
     flex-direction: column;
 }
 
+audio {
+    display: none;
+}
+
 .time {
     display: flex;
     width: 260px;
@@ -24,6 +28,7 @@ body {
 
 .time .minutesSeconds {
     display: flex;
+    width: 260px;
 }
 
 .time span {
@@ -51,7 +56,7 @@ body {
 
     outline: none;
 
-    width: 50%;
+    width: 114.75px;
 }
 
 .inputTimeMinutes::placeholder, .inputTimeSeconds::placeholder  {
@@ -131,6 +136,10 @@ body {
 
 .resetButton:hover  {
     background-color: rgba(51, 158, 191, 0.13);;
+}
+
+.resetButton svg circle {
+    fill: rgb(217 51 51);
 }
 
 .changeMode {
