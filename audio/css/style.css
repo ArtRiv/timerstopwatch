@@ -1,0 +1,116 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121214;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main {
+    margin: 0 auto;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.time .minutesSecondsInput{
+    display: flex;
+    width: auto;
+}
+
+.time .minutesSecondsInput .inputTime {
+    background-color: #121214;
+    color: #fff;
+    font-size: 100px;
+    font-family: "Roboto", sans-serif;
+
+    border: none;
+    outline: none;
+
+    width: 115px;
+}
+
+.inputTime::placeholder {
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+}
+
+.time .minutesSecondsInput span {
+    font-size: 100px;
+    color: #fff;
+    margin: 5px;
+
+    padding-bottom: 10px;
+}
+
+.controlButtons svg {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(8 49 62 / 2%);
+}
+
+.controlButtons {
+    width: 260px;
+    height: 80px;
+
+    margin-top: -15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controlButtons button {
+    height: 100%;
+    width: 50%;
+    cursor: pointer;
+}
+
+.controlButtons button:hover {
+    background: rgba(51, 147, 176, 0.436);
+}
+
+.controlButtons .startButton, .pauseButton {
+    background: rgba(66, 211, 255, 0.13);
+    border: none;
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+}
+
+.controlButtons .resetButton {
+    background: rgba(66, 211, 255, 0.13);
+    border: none;
+    border-top-right-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+}
+
+.changeMode {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.changeMode button {
+    background: rgba(66, 211, 255, 0.13);
+    border: rgb(255, 255, 255);
+    height: 50%;
+    width: 100%;
+}
+
+.changeMode svg {
+    height: 100%;
+    width: 100%;
+}
