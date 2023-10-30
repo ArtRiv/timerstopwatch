@@ -2,6 +2,8 @@ startButton.addEventListener("click", checkIfValid); // Start button event liste
 pauseButton.addEventListener("click", pauseTimer); // Pause button event listener
 resetButton.addEventListener("click", resetTimer); // Reset button event listener
 
+minutesInput.readOnly = false;
+secondsInput.readOnly = false;
 /**
  * Checks if the input values for minutes and seconds are valid, and takes the appropriate actions
  */
